@@ -1,0 +1,223 @@
+---
+title: "Pisa Project"
+author: "Granger Moch"
+date: "December 7, 2014"
+output: html_document
+---
+
+load("student2012.rda")
+load("scoredItem2012.rda")
+library(ggplot2)
+library(dplyr)
+library(rCharts)
+
+student2012$PV1MATH= as.numeric(student2012$PV1MATH)
+
+str(scoredItem2012)
+
+test= student2012 %>%
+select(CNT, PV1MATH) %>%
+filter(CNT=="Canada") %>%
+mutate(avg= 10972984/21544)
+
+sumcanada=10972984
+sumchina=3160802
+sumSweden=2269268
+sumUS=2394580
+str(student2012)
+
+averageshanghai=610.547
+averagecanada=509.329
+averageNorwaymath= 489.7529
+usaverage=481.0325
+
+avgs= c(averageshanghai, averagecanada, averageNorwaymath, usaverage)
+country= c("Shanghai", "Canada", "Norway", "US")
+
+avgmathdf= data.frame(country, avgs)
+
+avgmathbar <- rPlot(x = "country", y = "avgs", 
+  color = 'country', data = avgmathdf, type = 'bar', bounds = (y = 600))
+  
+avgmathbar
+
+avgmathbar$save('avgmathScoresbar.html',cdn=TRUE)
+
+-----------
+
+#Q32 (ST44) Confidence when it comes to math
+
+canadaUS= student2012 %>%
+select(1,ST44Q01) %>%
+filter(CNT=="Canada"| CNT=="United States of America", ST44Q01!= "NA")
+
+country= c("Canada", "US")
+responsemath= c("Very Likely", "Very Likely", "Likely", "Likely", "Slightly likely", "Slightly likely", "Not at all likely", "Not at all likely", "NA", "NA")
+
+canadaverylikely= (sum(canadaUS$CNT=="Canada" & canadaUS$ST44Q01=="Very   Likely")/21544*100)
+USverylikely=(sum(canadaUS$CNT=="United States of America" & canadaUS$ST44Q01=="Very   Likely")/4978 *100)
+canadalikely= (sum(canadaUS$CNT=="Canada" & canadaUS$ST44Q01=="Likely")/21544*100)
+USlikely=(sum(canadaUS$CNT=="United States of America" & canadaUS$ST44Q01=="Likely")/4978*100)
+canadaslightly=(sum(canadaUS$CNT=="Canada" & canadaUS$ST44Q01=="Slightly likely")/21544*100)
+USslightly=(sum(canadaUS$CNT=="United States of America" & canadaUS$ST44Q01=="Slightly likely")/4978*100)
+canadanotatall=(sum(canadaUS$CNT=="Canada" & canadaUS$ST44Q01=="Not at all likely")/21544*100)
+USnotatall=(sum(canadaUS$CNT=="United States of America" & canadaUS$ST44Q01=="Not at all likely")/4978*100)
+canadana= 33.63
+usna= 35.13
+
+valuesmath=c(canadaverylikely, USverylikely, canadalikely, USlikely, canadaslightly, USslightly, canadanotatall, USnotatall, canadana, usna)
+
+mathdf1=data.frame(country, responsemath, valuesmath)
+
+uvmathUS_canada=uPlot(x = 'country', y = 'valuesmath', group='responsemath', data = mathdf1, type = 'Bar', height = '400', width = '600')
+
+uvmathUS_canada$config(meta = list(
+  vlabel  = "Country",
+  hlabel= "Percent"))
+
+uvmathUS_canada
+uvmathUS_canada$save('mathconfidence.html', cdn = TRUE)
+uvmathUS_canada$set(width = 500)
+uvmathUS_canada$set(legendPosition = 'right')
+
+?uPlot()
+
+------
+
+
+
+uvmathUS_canada$legend(width = 400, height = 20, horizontalAlign = "right")
+------------------------------------------
+
+#My parents believe it’s important for me to study mathematics:
+
+count(student2012$CNT=="Canada" & student2012$ST35Q04=="NA")
+count(student2012$CNT=="United States of America" & student2012$ST35Q04=="NA")
+
+parentsview= student2012 %>%
+select(1, ST35Q04) %>%
+filter(CNT=="United States of America" | CNT=="Canada", ST35Q04!="NA")
+
+parentsviewcountry= c("Canada", "US")
+parentsviewresponse= c("Strongly Agree", "Strongly Agree", "Agree", "Agree", "Disagree", "Disagree", "Strongly Disagree", "Strongly Disagree", "NA", "NA")
+
+Canadastrongly= (sum(parentsview$CNT=="Canada" & parentsview$ST35Q04=="Strongly agree")/21544*100)
+USstrongly=(sum(parentsview$CNT=="United States of America" & parentsview$ST35Q04=="Strongly agree")/4978 *100)
+canadaagree= (sum(parentsview$CNT=="Canada" & parentsview$ST35Q04=="Agree")/21544*100)
+USagree=(sum(parentsview$CNT=="United States of America" & parentsview$ST35Q04=="Agree")/4978 *100)
+canadadisagree= (sum(parentsview$CNT=="Canada" & parentsview$ST35Q04=="Disagree")/21544*100)
+USdisagree=(sum(parentsview$CNT=="United States of America" & parentsview$ST35Q04=="Disagree")/4978 *100)
+canadastrongdisagree= (sum(parentsview$CNT=="Canada" & parentsview$ST35Q04=="Strongly disagree")/21544*100)
+USstrongdisagree=(sum(parentsview$CNT=="United States of America" & parentsview$ST35Q04=="Strongly disagree")/4978 *100)
+canadaparentsna= 0.3487 * 100
+usparentsna= 0.3457212 *100
+
+
+
+parentsviewvalues= c(Canadastrongly, USstrongly, canadaagree, USagree, canadadisagree, USdisagree, canadastrongdisagree, USstrongdisagree, canadaparentsna, usparentsna)
+
+parentsviewdf= data.frame(parentsviewcountry, parentsviewresponse, parentsviewvalues)
+
+uvparentsviewUS_Can=uPlot(x = 'parentsviewcountry', y = ('parentsviewvalues'), group='parentsviewresponse', data = parentsviewdf, type = 'Bar')
+
+uvparentsviewUS_Can$config(meta = list(
+  caption= "Student's Percetions: My parents believe it’s important for me to study mathematics",
+  vlabel  = "Country",
+  hlabel= "Percent"))
+  
+uvparentsviewUS_Can
+
+uvparentsviewUS_Can$save('parentsview.html', cdn=TRUE)  
+  
+#This graph, based on the students' perspectives, shows that Canada parents consider math to be more important to study than parents in the United States. 
+  
+----------------
+
+televisiondfus= student2012 %>%
+select(CNT, ST27Q02) %>%
+filter(CNT=="United States of America", ST27Q02!="NA")
+
+televisiondfcanada= student2012 %>%
+select(CNT, ST27Q02) %>%
+filter(CNT=="Canada", ST27Q02!="NA")
+
+wtf=count(student2012$CNT=="Canada")
+
+18/4978
+
+ustvnone= (sum(televisiondfus$ST27Q02=="None")/4978 *100 )
+canadatvnone= (sum(televisiondfcanada$ST27Q02=="None")/21544 *100 )
+ustvone= (sum(televisiondfus$ST27Q02=="One")/4978 *100)
+canadatvnone= (sum(televisiondfcanada$ST27Q02=="One")/21544 *100 )
+ustvtwo= (sum(televisiondfus$ST27Q02=="Two")/4978 *100)
+canadatvtwo= (sum(televisiondfcanada$ST27Q02=="Two")/21544 *100)
+ustvthreeplus= (sum(televisiondfus$ST27Q02=="Three or more")/4978 *100)
+canadathreeplus= (sum(televisiondfcanada$ST27Q02=="Three or more")/21544 *100)
+usna= (94/4978) *100
+canadana=(501/21544)*100
+
+televisioncountry= c("US", "Canada")
+televisonresponses= c("None", "None", "One", "One", "Two", "Two", "Three or more", "Three or more", "NA", "NA")
+televisionvalues= c(ustvnone, canadatvnone, ustvone, canadatvone, ustvtwo, canadatvtwo, ustvthreeplus, canadathreeplus, usna, canadana)
+
+televisionFINALdf= data.frame(televisioncountry, televisonresponses, televisionvalues)
+
+
+tvstackedbar <- nPlot(televisionvalues ~ televisonresponses, group = 'televisioncountry', data = televisionFINALdf, type = 'multiBarChart')
+
+
+tvstackedbar$yAxis(axisLabel = "Percent")
+tvstackedbar
+
+tvstackedbar$save('tvstackedbar.html', cdn=TRUE)
+-----------
+# How many minutes, on average, there are in a math class according to the students
+
+student2012$ST69Q02=as.numeric(student2012$ST69Q02)
+
+mathTimeUS= student2012 %>%
+select(1, ST69Q02) %>%
+filter(ST69Q02!="NA", CNT=="United States of America")
+
+mathTimeCanada= student2012 %>%
+select(1, ST69Q02) %>%
+filter(ST69Q02!="NA", CNT=="Canada")
+
+mathTimedf= rbind(mathTimeUS, mathTimeCanada)
+
+?rbind
+
+mathTimeboxplot<- ggplot(mathTimedf, aes(CNT, ST69Q02)) + geom_boxplot() + xlab("Country") + ylab("Minutes") + ggsave(file="mathTimeboxplot.png")
+mathTimeboxplot 
+
+
+?ggsave
+
+
+--------
+
+test= student2012 %>%
+select (count()) %>%
+arrange(desc)%>%
+tail(10)
+
+numobs=sum(count(countryfrequency$freq))
+countryfrequency=(count(student2012$CNT))
+countryfrequencypercent=data.frame(countryfrequency$x, (countryfrequency$freq/numobs)*100)
+
+countryfrequencypercentdf= countryfrequencypercent %>%
+arrange(countryfrequencypercent$X.countryfrequency.freq.numobs....100) %>%
+tail(5)
+
+library(plotrix)
+slices <- countryfrequencypercentdf$X.countryfrequency.freq.numobs....100
+
+lbls <- countryfrequencypercentdf$countryfrequency.x
+
+pie=pie3D(slices,labels=lbls, explode=0.3, main="Country Representation in Datset")
+
+
+png("pie.png")
+
+    
+    

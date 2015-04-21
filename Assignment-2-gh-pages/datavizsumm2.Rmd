@@ -1,0 +1,62 @@
+---
+title: 'Data Visualization Article Summary:'
+author: "Granger Moch"
+date: "September 10, 2014"
+output: slidy_presentation
+---
+
+## How To Graph Badly: Notes from John Boyd’s class on Scientific Visualization and Information Architecture
+The article's author aims to draw knowledge from the mistakes made in what he refers to as the "art of visualization."The author alludes to what Edward Tufte calls "chartjunk", or essentially worthless features that serve no functional purpose. The author attributes this unfortunate trend of chartjunk to the uprising of professional artists who place more emphasis on the visual element of the visualization than the data which the visualization is intended to convey. Chartjunk is commonplace amongst business solutions such as ERP systems which utilize the notorious dashboard approach to visualizing business intelligence.  Hard to read fonts,excess shading,  extraneous artwork and 3D perspectives, and otherwise unnnecessary, distracting visuals, can all be labeled as chartjunk. To put it more broadly, chartjunk is the spawn of bad graphing. This isn't to say fonts, colors, and other visuals are innately "bad" have no place in visualization. Rather, they should be used wisely and in a way that does not take away from the data but instead supplements it. This is easy to say in theory but another matter to do in practice. This raises the need for someone besides the graph author to assess the graph for readability. I see a direct parallel to program development in that the code's author may easily understand his program construct, variable names, etc, but a 3rd party developer trying to make sense of the code may have an extrememly difficult time.  This unfortunate yet common situation demonstrates the merit in documentation, despite the hassle it is often thought of as. As it relates to graphs, the author may be able to glean the information he/she intended to convey through the visualization whereas another person may not receive the same information.  When it comes to the important task of documenting (and being able to reproduce)graphs and other visualizations, I think R offers a reliable and effective means of doing so.
+
+## How to Graph Badly, continued...
+
+Another common graphing mistake that seems universal to all sciences is over-interpreting the results.  The article words it quite precisely when it says that "sometimes experiments just don't work." The author does admit, in the defense of the people making these mistakes, that "the pressures to keep publishing so that one can keep grant funding, get tenure, etc. make it difficult to do this." Worse than over-interpreting the graph however, is "willing" the result you are seeking to artificially occur- when the numbers clearly show otherwise. A classic example is purposefully ignoring an extreme outlier which indicates no correlation, when a correlation is being sought after.
+    Via the author pointing out what NOT to do when it comes to graphing, I was able to walk away with several useful tips of what I SHOULD do when it comes to graphing. For example:
+   
+   - High Data Density as compared to lower density
+   - Avoid Data Hiding
+   - Use Length as a Visual Metaphor (and avoid using area)
+    
+## The Gospel According to Tufte
+Much like the previous author, the article sheds light on the value of high density data.  One of Tufte's principles is that the best graphics "present their message as simply as possible." To make this somewhat more concrete, Tufte came up with the concept of data-ink, or ink that can not be erased from the painting without in turn erasing data. The following formula shows the ratio of data-ink to total ink used on the page: 
+
+      data-ink ratio = data-ink/ total ink used to print the graphic
+      
+Because even this formula leaves room for variablility in interpreation, namely the reader's own perspective, Tufte further elaborates on his data-ink concept in the form of five maxims.
+Tufte’s Five Laws of Data-Ink are as follows:
+
+- Above all else show the data.
+- Maximize the data-ink ratio
+- Erase non-data-ink.
+- Erase redundant data-ink.
+- Revise and edit.
+
+ The article proceeds to describe each of these maxims in detail.
+ 
+## Show the Data
+
+Tufte labels this as the most important of his maxims "because the 'data-ink' is undefined until one has first developed a purpose for the graphic." This is the equivalent of a topic sentence in the sense that it asks "what is this essay about?" When the time comes to actually design the graph, a person should undoubtedly be able to make a statement as to the graph's purpose.
+
+## Emphasize the Data
+
+While all visualizations have "non-data" elements such as axis labels, these elements should be "de-emphasized" in relation to the true data. Because emphasizing the data isn't actually merely an artistic touch  The reasons for emphasizing the data are quite self-explanatory, but the methods to go about doing this are a separate matter.  One particular method the article suggests to maximizing the data-ink ratio, is to draw the graph's curve with a thicker line than is used for the axis and labels.
+
+The article also points out an interesting fact regarding the history of grid lines used on graphing paper. In the dark ages, when graphing was still done by hand, scientists came to expect and appreciate the grid lines as a means of creating more precise graphs. It proceeds naturally that these scientists to want grid lines when reading graphs as well.  As a result, scientists grew to be quite accomplished at ignoring the grid lines; the faint grid lines aided in this task.  Furthermore, these lines were not visible when the graph is xeroxed.  The world is not what it was 50 years ago however, and the author accordingly warns against the use of the grid lines in this modern age. Today's scientists are not accustomed to ignoring the grid lines, or as the author puts it: "their visual systems are not so good
+at unconsciously filtering them from the graph when the mind is trying to concentrate on the data-curves." Consequently, grid lines should be used practically.Besides the previously mentioned technique of emboldening the graph's line, a person can also make use of dotted grids (or certainly no grid at all) so as to make the data the forefront of a reader's attention.
+
+This isn't to say that grid lines are wrong in themselves, for the article points out they do have some rare uses- the nomogram being one of them. As a whole however, they should be avoided more than they should be employed.  Tufte provides two heuristics when it comes to using grid lines:
+
+- Don’t use a grid unless you really have to.
+- Make the grid lines faint compared to the data-curves by drawing the grid as thin lines or dotted lines or by using a thick line for the data.
+
+##  Erase Non-Data-Ink or Down with the Grid!
+When it comes to using a full graph frame or a half frame, Tufte suprisingly has "no strong opinions." While Tufte himself is accustomed to a full frame, he admits that no data is lost in using the half frame.  In using the half frame, non-data-ink is reduced while the data-ink is conversely effected.
+
+Tufte illustrates this point with a bar graph that he has simplified, juxtaposed to the original.  It should be noted that the original bar graph has a bit of an advantage in that is is widely recognized and already familiar to the majority of readers.  Tufte's graph is minimilistic, and beyond its unfamiliarty it conveys the same information as its original form.
+
+Somtimes, as Tufte points out, the entire graph should be erased and replaced with a graph of a different type.  A bar graph whose axis labels are jumbled and stacked every which way to fit, may be better suited to a table. This adds validity to choosing the right graph during planning phases.
+
+## The Shrink Principle
+
+In alignment with Tufte's notion that high density data is, the shrink principle advocates the combination of multiple graph panels into one uniform panel. In this way, the graph is made more informative and reading time is increased.
+

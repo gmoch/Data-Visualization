@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ColumnChartID14a124055c21</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<center><body>
+
+<h1> Data Visualization HW: Pew Global Dataset </h1>
+<h2> Granger Moch and Will Murphy </h2>
+<h3> November 17th, 2014 </h3>
+<br>
+<hr>
+ <!-- ColumnChart generated in R 3.1.1 by googleVis 0.5.6 package -->
+<!-- Mon Nov 17 20:42:06 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataColumnChartID14a124055c21 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "70-75",
+940,
+416 
+],
+[
+ "76-81",
+374,
+229 
+],
+[
+ "82-87",
+176,
+149 
+],
+[
+ "88-93",
+29,
+36 
+] 
+];
+data.addColumn('string','elderlyage');
+data.addColumn('number','Yes');
+data.addColumn('number','No');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartColumnChartID14a124055c21() {
+var data = gvisDataColumnChartID14a124055c21();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    750;
+options["height"] =    400;
+options["isStacked"] = true;
+options["title"] = "Cell Phone Ownership on Behalf of the Elderly";
+options["hAxes"] = [{title:'Age', textPosition: 'out'}];
+options["vAxes"] = [{title:'Responses', textPosition: 'out'}];
+
+
+    var chart = new google.visualization.ColumnChart(
+    document.getElementById('ColumnChartID14a124055c21')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartColumnChartID14a124055c21);
+})();
+function displayChartColumnChartID14a124055c21() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID14a124055c21"></script>
+ 
+<!-- divChart -->
+  
+<div id="ColumnChartID14a124055c21" 
+  style="width: 750; height: 400;">
+</div>
+<hr>
+<h3> Current (perceived) personal economic situation vs. current (perceived) country's economic status </h3>
+<iframe src="http://gballa50.github.io/googleVizrepo/uv.html" height="600" width="600"> </iframe>
+<hr>
+<br>
+<h3> Pie chart showing number of respondents from each party </h3>
+
+<iframe src="http://gballa50.github.io/googleVizrepo/pie.html"  height="400" width="800"> </iframe>
+
+<hr>
+<h3> UV chart showing gender, forecast of PERSONAL economic situation over the next 12 months </h3>
+<iframe src="http://gballa50.github.io/googleVizrepo/uvgender.html" height="600" width="600"> </iframe>
+
+</body></center>
+</html>

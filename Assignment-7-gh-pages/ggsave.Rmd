@@ -1,0 +1,70 @@
+---
+title: "Untitled"
+author: "Granger Moch"
+date: "November 18, 2014"
+output: html_document
+---
+
+
+library(dplyr)
+library(ggplot2)
+library(reshape2)
+library(scales)
+library(rCharts)
+library(googleVis)
+library(formatR)
+
+
+load("mydata.rda")
+
+read.csv("pewdf.csv")
+write.csv(pewdf, file = "pewdf.csv")
+
+
+
+overallpewdf=mydata %>%
+  select(COUNTRY, Q1, Q4, Q5, Q6, Q7, Q8, Q47US, Q164, Q165, PARTY, PARTYLN)
+
+
+gendersatisfaction=overallpewdf %>%
+  select(COUNTRY, Q164, Q1, PARTY, PARTYLN) %>%
+  group_by(COUNTRY, Q164, Q1)
+  
+usparty=overallpewdf %>%
+  select(COUNTRY, Q1, Q4, Q5, Q6, Q7, Q8, Q47US, Q164, PARTY, PARTYLN) %>%
+  filter(COUNTRY=="United States") %>%
+  group_by(PARTY, Q1, Q5)
+
+
+globalecontest=overallpewdf %>%
+  select(COUNTRY, Q7, Q8) %>%
+  group_by(COUNTRY, Q7, Q8) 
+
+
+partylntest=usparty %>%
+  filter(PARTYLN!="NA",PARTYLN!="Refused",PARTYLN!="Other (Volunteered)") 
+
+
+gensat=ggplot(gendersatisfaction,aes(x=Q1,stat="bin",fill=Q164))+geom_bar(position="dodge")+ggtitle("Global Gender Satisfaction With Their Country")+ylab("Total Category Responses")+xlab("Satisfaction Level")
+
+gensat
+
+ggsave("gensat.png", gensat, scale=2)
+
+uspart= ggplot(usparty,aes(x=Q5,stat="bin",fill=PARTY))+geom_bar(position="dodge")+ggtitle("US Economic Improvement Expectations") +ylab("Total Responses") +xlab("Economic Expectations by Party")  
+
+ggsave("uspart.png", uspart, scale=3)
+
+q47=ggplot(usparty,aes(x=Q47US,stat="bin",fill=Q47US))+geom_bar(stat="bin")+ggtitle("How Much Does US International Policy Take Into Account Other Countries?")+ylab("Total US Responses")+xlab("Answers")+theme(legend.position="none")
+q47
+ggsave("q47.png", q47, scale=2)
+
+gc=ggplot(globalecontest,aes(x=COUNTRY,stat="bin",fill=Q8))+geom_bar()+coord_flip()+ggtitle("Will Children Be Better Off Financially Than Their Parents?")+xlab("Country")+ylab("Number of People")
+
+ggsave("gc.png", gc, scale=2)
+
+partyln=ggplot(partylntest,aes(x=PARTYLN,stat="bin",fill=PARTYLN))+geom_bar()+theme(legend.position="none")+xlab("Party Independents Would Lean Towards")+ggtitle("Political Party Independents Would Lean Towards If They Had to Choose")
+
+ggsave("partyln.png", partyln, scale=2)
+
+?ggsave()

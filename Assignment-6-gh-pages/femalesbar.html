@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<h1> Bar Graph Showing the Percentage of Passing Females in the U.S </h1>
+<title>BarChartID51e5bdc7a1c</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+ <!-- BarChart generated in R 3.1.1 by googleVis 0.5.6 package -->
+<!-- Tue Nov 11 13:09:14 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataBarChartID51e5bdc7a1c () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "California",
+72.25325885 
+],
+[
+ "Texas",
+57.14285714 
+],
+[
+ "New York",
+57.29442971 
+],
+[
+ "Virginia",
+67.20779221 
+],
+[
+ "Maryland",
+58.82352941 
+],
+[
+ "New Jersey",
+69.83471074 
+],
+[
+ "Illinois",
+64.03940887 
+],
+[
+ "Florida",
+34.96732026 
+],
+[
+ "Georgia",
+37.11790393 
+],
+[
+ "Mass",
+61.70212766 
+],
+[
+ "Pennsylvania",
+74.52830189 
+],
+[
+ "Washington",
+72.77777778 
+],
+[
+ "Ohio",
+79.41176471 
+],
+[
+ "Michigan",
+77.27272727 
+],
+[
+ "North Carolina",
+58.73015873 
+],
+[
+ "Connecticut",
+62.92134831 
+],
+[
+ "Indiana",
+71.875 
+],
+[
+ "Minnesota",
+72.72727273 
+],
+[
+ "Colorado",
+54.34782609 
+],
+[
+ "Kentucky",
+76.92307692 
+],
+[
+ "Wisconsin",
+71.42857143 
+],
+[
+ "South Carolina",
+45.61403509 
+],
+[
+ "Tenn",
+61.64383562 
+],
+[
+ "Arizona",
+36.66666667 
+],
+[
+ "Oregon",
+72.72727273 
+],
+[
+ "Oklahoma",
+56.66666667 
+],
+[
+ "Arkansas",
+35.41666667 
+],
+[
+ "Missouri",
+56 
+],
+[
+ "Maine",
+84 
+],
+[
+ "Alabama",
+77.27272727 
+],
+[
+ "Iowa",
+72.72727273 
+],
+[
+ "New Hampshire",
+50 
+],
+[
+ "Hawaii",
+37.5 
+],
+[
+ "West Virginia",
+60 
+],
+[
+ "Delaware",
+44.44444444 
+],
+[
+ "Rhode Island",
+88.88888889 
+],
+[
+ "New Mexico",
+62.5 
+],
+[
+ "Idaho",
+66.66666667 
+],
+[
+ "Nebraska",
+100 
+],
+[
+ "South Dakota",
+80 
+] 
+];
+data.addColumn('string','X2013.data');
+data.addColumn('number','X..female.passed.1');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartBarChartID51e5bdc7a1c() {
+var data = gvisDataBarChartID51e5bdc7a1c();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    950;
+options["height"] =    800;
+options["title"] = "Percentage of Females Passed in Each State*";
+options["legend"] = "none";
+options["vAxis"] = {title: 'State', gridlines:{color:'black', count:3}};
+options["hAxis"] = {title:'Percentage of Females Who Passed', titleTextStyle:{color:'black'}};
+
+
+    var chart = new google.visualization.BarChart(
+    document.getElementById('BarChartID51e5bdc7a1c')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartBarChartID51e5bdc7a1c);
+})();
+function displayChartBarChartID51e5bdc7a1c() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID51e5bdc7a1c"></script>
+ 
+<!-- divChart -->
+  
+<div id="BarChartID51e5bdc7a1c" 
+  style="width: 950; height: 800;">
+</div>
+ <div><span>Data: data &#8226; Chart ID: <a href="Chart_BarChartID51e5bdc7a1c.html">BarChartID51e5bdc7a1c</a> &#8226; <a href="https://github.com/mages/googleVis">googleVis-0.5.6</a></span><br /> 
+<!-- htmlFooter -->
+<span> 
+  R version 3.1.1 (2014-07-10) 
+  &#8226; <a href="https://developers.google.com/terms/">Google Terms of Use</a> &#8226; <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/barchart">Documentation and Data Policy</a>
+</span></div>
+</body>
+</html>

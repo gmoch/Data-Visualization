@@ -1,0 +1,96 @@
+---
+title: "DataVizTestScoresHW"
+author: "Granger Moch, Will Murphy"
+date: "November 10, 2014"
+output: html_document
+---
+
+library(dplyr)
+library(googleVis)
+stateinfocsv= read.csv("stateinfo.csv")
+
+stateinfo= stateinfocsv %>%
+select(1,10) %>%
+head(50)
+
+str(stateinfo)
+
+#Bar Graph Showing Percentages of Females Who Passed From Each State
+Bar <- gvisBarChart(stateinfo, xvar= "X2013.data", yvar= "X..female.passed.1", 
+    options=list(
+    width=950, height=800,
+    title="Percentage of Females Passed in Each State*",
+    legend= "none",
+    vAxis="{title: 'State', gridlines:{color:'black', count:3}}",
+    hAxis="{title:'Percentage of Females Who Passed', titleTextStyle:{color:'black'}}"))
+    
+plot(Bar)
+
+print(Bar, file="femalesbar.html")
+
+#GeoMap
+hispanic_Csv= read.csv("HispanicScores.csv")
+
+hispanicdf= hispanic_Csv %>%
+select(1,23) %>%
+head(50)
+
+GeoStatesHispanic <- gvisGeoChart(hispanicdf, "X2013.data", "X..Hispanic.passed.1", options=list(
+title="Percentage of Hispanic Students Who Passed", region="US", displayMode="regions", resolution="provinces", width=600, height=400))
+
+plot(GeoStatesHispanic)
+
+print(GeoStatesHispanic, file="GeoStatesHispanic.html")
+---------
+
+black_csv= read.csv("BlackScores.csv")
+
+blackdf= black_csv %>%
+select(1,14) %>%
+head(50)
+
+GeoStatesBlack <- gvisGeoChart(blackdf, "X2013.data", "X..Black.passed", options=list(region="US", displayMode="regions", resolution="provinces", width=600, height=400))
+
+plot(GeoStatesBlack)
+
+print(GeoStatesBlack, file="GeoStatesBlack.html")
+
+-----
+
+malesfemalescsv= read.csv("malesfemales.csv")
+
+malesfemalesdf= malesfemalescsv %>%
+select(1, 10, 32)%>%
+head(50)
+
+doublebar=gvisBarChart(malesfemalesdf, xvar="X2013.data", yvar=c("X..female.passed.1", "X..Males.Passed.1"), 
+                       options=list(titleTextStyle="{color:'black', 
+                                           fontName:'Orbitron', 
+                                           fontSize:16}",                                                   
+                         vAxis="{gridlines:{color:'red', count:3}}",
+                         hAxis="{title:'Percentage'}",
+                         series="[{color:'red', targetAxisIndex: 0}, 
+                                   {color: 'black',targetAxisIndex:1}]",
+                         vAxes="[{title:'State'}]",
+                         legend="right",
+                         width=1200,
+                         height=900                       
+                       ))
+
+plot(doublebar)
+
+print(doublebar, file="doublebar_male_female.html")
+
+------
+
+GeoStatesMale <- gvisGeoChart(malesfemalesdf, "X2013.data", "X..Males.Passed.1", options=list(region="US", displayMode="regions", resolution="provinces", width=600, height=400))
+
+plot(GeoStatesMale)
+print(GeoStatesMale, file="GeoStatesMale.html")
+
+GeoStatesFemale <- gvisGeoChart(malesfemalesdf, "X2013.data", "X..female.passed.1", options=list(region="US", displayMode="regions", resolution="provinces", width=600, height=400))
+
+plot(GeoStatesFemale)
+print(GeoStatesFemale, file="GeoStatesFemale.html")
+
+

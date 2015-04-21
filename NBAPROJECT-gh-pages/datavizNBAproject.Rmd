@@ -1,0 +1,78 @@
+---
+title: "NBA Dataset Project #1"
+author: "Granger Moch, Will Murphy"
+date: "October 18, 2014"
+output: pdf_document
+abstract: test
+geometry: margin=1.5cm
+---
+#Initiate Needed Packages
+```{r}
+library(ggplot2)
+library(reshape2)
+library(dplyr)
+library(scales)
+library(gridExtra)
+library(grid)
+```
+\newpage
+
+#Debt Percentage and Rank
+
+Which franchises held the highest debt percentage in 2012 and in light of their debt, how did these franchises rank in comparison?    
+
+
+```{r}
+nbafran=read.csv("nba_franchise_values_1991_2012.csv")
+
+
+debt_rank2012= nbafran %>%
+      select(team, year, debt_percent, rank) %>%
+      filter(year== "2012") %>%
+      arrange(desc(debt_percent)) %>%
+      head(10)
+```
+
+```{r fig.width=9, fig.height=7}
+ggplot(debt_rank2012, aes(x=reorder(team,rank), y=debt_percent, fill=rank, label=debt_percent)) +geom_bar(stat="identity") +geom_text(angle=0, colour="white")+ theme(panel.background = element_rect(fill = 'black')) +ggtitle("Top 10 Teams With Highest Debt Percentage and Their Ranking for 2012") +ylab("Percent Debt") +xlab("Team")+ coord_flip()
+```
+\newpage
+
+
+
+\newpage
+
+#Facebook Friends and Metro Population
+
+How many Facebook friends did each NBA team have at the close of the 2011-2012 season, and were these numbers at all effected by the metro population of the area?
+
+```{r fig.width=11, fig.height=7}
+forbsdf= read.csv("Forbes NBA Financials 03-12.csv")
+
+popularteams= forbsdf %>%
+ select(Team, Metro.Pop, Facebook.Friends, Twitter.Followers) %>%
+      arrange(desc(Facebook.Friends)) %>%
+      head(10)
+
+ggplot(popularteams, aes(reorder(x=Team,Facebook.Friends), y= Facebook.Friends, fill=Metro.Pop,
+                         label=Facebook.Friends)) +geom_bar(stat="identity") + xlab("Teams") +ggtitle("The Ten NBA Teams with Highest # of Facebook Friends in 2011-2012")+ scale_y_continuous(labels= comma) + geom_text(angle=0, colour= "white", hjust="1") +coord_flip() + theme(panel.background = element_rect(fill = 'tan'))
+```
+\newpage
+
+##Scatter Plot 
+```{r fig.width=9, fig.height=7}
+ggplot(forbsdf, aes(x=log(Facebook.Friends), y=Metro.Pop)) + geom_point() + scale_x_continuous(labels= comma) + ggtitle("Scatter Plot Showing Relationship Between Metro Population and FB Friends for ALL Teams(2011-2012)") + geom_smooth()   
+```
+
+\newpage
+
+#Ticket Revenue for Arena's at Full Capacity
+```{r}
+forbsdf$fullCapTixRev= (forbsdf$Capacity * forbsdf$Avg.Tix.Price)
+```
+
+```{r fig.width=9, fig.height=8}
+ggplot(forbsdf, aes(x=Team, y=fullCapTixRev, fill=Playoff.Contender, label=fullCapTixRev)) + geom_bar(stat="identity") +coord_flip() + scale_y_continuous(labels= comma) +geom_text(angle=0, colour="white", hjust="1")+ theme(panel.background = element_rect(fill = 'white')) +ggtitle("Average Ticket Revenue Per Full-Capacity Game for Each Stadium: 2011-2012 Season") + ylab("Ticket Revenue(at full capacity)")
+```
+
+

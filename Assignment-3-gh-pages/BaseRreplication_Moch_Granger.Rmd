@@ -1,0 +1,327 @@
+---
+title: "Base R Plots: A Guide to Plotting in R"
+author: "Granger Moch"
+date: "9/19  /2014"
+output:
+  pdf_document:
+    fig_caption: yes
+    fig_height: 8
+    fig_width: 9
+    highlight: tango
+    number_sections: yes
+    toc: yes
+    toc_depth: 3
+---
+
+\newpage 
+
+# Purpose
+
+I am creating this guide not solely for the assignment, but so that those that are new to R can recognize the extensive functionality it offers. Furthermore, I hope to provide a succinct introduction to several different graph types and their uses. for both my sake as well as those who read this guide.
+
+#Data 
+
+## Simulate Data
+
+## 3 Factor Variables
+```{r}
+FacVar1=as.factor(rep(c("level1","level2"),25))
+FacVar2=as.factor(rep(c("levelA","levelB","levelC"),17)[-51])
+FacVar3=as.factor(rep(c("levelI","levelII","levelIII","levelIV"),13)[-c(51:52)])
+```
+
+## 4 Numeric Vars
+```{r}
+set.seed(123)
+NumVar1=round(rnorm(n=50,mean=1000,sd=50),digits=2) ## Normal distribution
+set.seed(123)
+NumVar2=round(runif(n=50,min=500,max=1500),digits=2) ## Uniform distribution
+set.seed(123)
+NumVar3=round(rexp(n=50,rate=.001)) ## Exponential distribution
+NumVar4=2001:2050
+
+simData=data.frame(FacVar1,FacVar2,FacVar3,NumVar1,NumVar2,NumVar3,NumVar4)
+```
+
+We can now use this data frame "simData", as created above, to plot the sample data using a variety of graph types. Each graph type has its advantages and disadvantages, but when used appropriately graphs can be very useful for visualizing data. 
+
+For more information on why the set.seed function is used, see this page: http://stackoverflow.com/questions/13605271/reasons-for-using-the-set-seed-function
+
+\newpage 
+
+# Plotting One Numeric Variable #
+
+## Index Plot
+An index plot is a scatterplot of values on some measure plotted serially against the associated observation (case) number within the sample. It can help in highlighting extreme values in a sample and in indicating trends when the data are, for instance, in spatial or time order.
+```{r fig.cap="Index Plot of One Numeric Variable"}
+plot(simData$NumVar1,type="o") 
+```                                 
+
+\newpage 
+
+## Histogram
+A Histogram is a graphical display of data using bars of various heights. Not to be confused with a bar chart, a histogram groups numbers into ranges of your choice. They are an excellent way to display continuous data, for example weight, minutes, etc.
+
+```{r fig.cap="Histogram of One Numeric Variable"}
+hist(simData$NumVar1) 
+```    
+
+\newpage 
+       
+## Kernel Density Plot
+Kernel density estimation (KDE) is one way to estimate the probability density function of a certain random variable.  With this type of plot, inferences can be made about the population.
+
+```{r fig.cap="Kernel Density Plot of One Numeric Variable"}
+plot(density(simData$NumVar1)) ## Kernel density plot
+```
+
+\newpage 
+
+## Box Plot
+The box plot (also known as the box and whisker diagram) is a means of displaying the distribution of data based on a five zone tier from bottom to top : minimum, first quartile, median, third quartile, and maximum.
+
+```{r fig.cap="Box Plot of One Numeric Variable"}
+boxplot(simData$NumVar1) ## box plot
+```
+
+\newpage 
+
+# Plotting One Factor Variables
+
+## Bar Plot
+A bar plot is a chart that uses horizontal (or vertical) bars to show comparisons among different categories. On one axis the specific categories being compared are shown, and on the other axis, a discrete value scale.  Bar charts are particularly handy for displaying data that is classified into nominal or ordinal categories. Nominal data are categorised according to descriptive or qualitative information such as state of birth, or ethnicity. Ordinal data is somewhat similar but the different categories can also have the attribute of rank.
+```{r fig.cap="Bar Plot of One Factor Variable"}
+plot(simData$FacVar3) ## bar plot
+```
+
+\newpage 
+
+## Pie Chart
+“The pie chart is a simple information graphic whose principal purpose is to show the relationship of a part to the whole. It is, by and large, the wrong choice as an exploratory device, and it is certainly not the correct choice when the graph maker or graph reader has a complicated purpose in mind,” (Ian Spence, No Humble Pie: The Origins and Usage of a Statistical Chart). 
+
+Although the pie chart does have a few upsides, such as providing the ability to quickly identify the largest and smallest portions as they relate to the whole, it should certainly be used cautiously. In many instances, it can be very difficult to tell which portion is larger and estimating HOW much larger can be even tougher. Furthermore, the overall ease of reading decreases as the number of sections increase. Thus, pie charts will not be appropriate for comparing a high number of categories.
+
+```{r fig.cap="Pie Chart of One Factor Variable"}
+counts=table(simData$FacVar3) ## get counts
+labs=paste(simData$FacVar3,counts)## create labels
+pie(counts,labels=labs) ## plot
+```
+
+\newpage 
+
+# Two Numeric Variables
+
+##Index Plot (with one variable)
+
+```{r fig.cap="Index Plot of One Factor Variable"}
+plot(simData$NumVar1,type="o",ylim=c(0,max(simData$NumVar1,simData$NumVar2)))## index plot with one variable
+```
+
+\newpage 
+
+##Index Plot (with two variables)
+
+```{r fig.cap="Index Plot of One Factor Variable: Added Variable"}
+plot(simData$NumVar1,type="o",ylim=c(0,max(simData$NumVar1,simData$NumVar2)))
+lines(simData$NumVar2,type="o",lty=2,col="red") ## add another variable
+```
+
+\newpage 
+
+## Density Plots
+```{r fig.cap="Density Plot of One Factor Variable"}
+dv1=density(simData$NumVar1) 
+dv2=density(simData$NumVar2)
+plot(range(dv1$x, dv2$x),range(dv1$y, dv2$y), type = "n", xlab = "NumVar1(red) and NumVar2 (blue)",
+     ylab = "Density")
+lines(dv1, col = "red")
+lines(dv2, col = "blue")
+```
+
+\newpage 
+
+## Scatter Plots
+Scatter plots are used to plot data points on a horizontal and a vertical axis so as to show the effects of one variable on another. It is useful for identifying relationships, should any exist, between two variables.
+```{r fig.cap="Scatter Plot of One Factor Variable"}
+plot(simData$NumVar1,simData$NumVar2)
+```
+
+\newpage 
+
+# Two Factor Variables
+
+## Mosaic Plot
+For enlightenment on Mosaic Plots, reference this page: http://www.vicc.org/biostatistics/LuncheonTalks/DrTsai2.pdf
+```{r fig.cap="Mosaic Plot of Two Factor Variables"}
+plot(table(simData$FacVar2,simData$FacVar3))
+```
+
+\newpage 
+
+## Bar Plots
+
+```{r fig.cap="Bar Plots of Two Factor Variables"}
+bartable=table(simData$FacVar2,simData$FacVar3) ## get the cross tab
+barplot(bartable,beside=TRUE, legend=levels(unique(simData$FacVar2))) ## plot 
+```
+
+\newpage
+
+### Stacked Bar Plot
+
+```{r fig.cap="Stacked Bar Plots of Two Factor Variables"}
+barplot(bartable, legend=levels(unique(simData$FacVar2))) ## stacked
+```
+
+\newpage 
+
+### Stacked Bar Plot (100% scale)
+```{r fig.cap="Stacked Bar Plots of Two Factor Variables (100% scale)"}
+barplot(prop.table(bartable,2)*100, legend=levels(unique(simData$FacVar2))) ## stacked 100%
+```
+
+\newpage 
+
+# Two Variables: One Factor and One Numeric 
+
+## Box Plots
+```{r fig.cap="Box Plots of One Factor Variable and One Numeric Variable"}
+## Box plots for the numeric var over the levels of the factor var
+plot(simData$FacVar1,simData$NumVar1) 
+```
+
+\newpage 
+
+## Data Density Plot
+
+```{r fig.cap="Data Density Plot of One Factor Variable and One Numeric Variable"}
+level1=simData[simData$FacVar1=="level1",] 
+level2=simData[simData$FacVar1=="level2",]
+
+dv3=density(level1$NumVar1)
+dv4=density(level2$NumVar1)
+
+plot(range(dv3$x, dv4$x),range(dv3$y, dv4$y), type = "n", xlab = "NumVar1 at Level1 (red) and NumVar1 at Level2 (blue)",ylab = "Density")
+lines(dv3, col = "red")
+lines(dv4, col = "blue")
+```
+
+\newpage
+
+##Dotchart
+
+```{r}
+meanagg=aggregate(simData$NumVar1, list(simData$FacVar3), mean) #Mean of one numeric var over levels of one factor var
+```
+
+```{r fig.cap="Dot Chart of One Factor Variable and One Numeric Variable"}
+dotchart(meanagg$x,labels=meanagg$Group.1)
+```
+
+\newpage
+
+##Bar Plot
+
+```{r fig.cap="Bar Plot of One Factor Variable and One Numeric Variable"}
+barplot(meanagg$x,names.arg=meanagg$Group.1)
+```
+\newpage 
+
+# Three Variables: Three Factor Variables
+
+## Boxplot
+
+```{r fig.cap="Box Plots of Three Factor Variables"}
+par(mfrow=c(1,2))
+
+bar1table=table(level1$FacVar2,level1$FacVar3)
+barplot(bar1table,beside=TRUE, main="FacVar1=level1")
+
+bar2table=table(level2$FacVar2,level2$FacVar3)
+barplot(bar2table,beside=TRUE, main="FacVar1=level2", legend=levels(unique(level2$FacVar2)))
+```
+
+\newpage 
+
+# Three Variables: One Numeric and Two Factor Variables
+
+## Box Plot
+```{r fig.cap="Box Plots of One Numeric Variable and Two Factor Variables Variables"}
+par(mfrow=c(1,1))
+## boxplot of NumVar1 over an interaction of 6 levels of the combination of FacVar1 and FacVar2
+boxplot(NumVar1~interaction(FacVar1,FacVar2),data=simData)
+```
+
+\newpage 
+
+## Dot Chart of Mean of 1 Numeric over levels of two factor vars
+
+```{r fig.cap="Dot Chart of One Numeric Variable and Two Factor Variables"}
+meanaggg=aggregate(simData$NumVar1, list(simData$FacVar1,simData$FacVar2), mean)
+meanaggg=meanaggg[order(meanaggg$Group.1),]
+meanaggg$color[meanaggg$Group.2=="levelA"] = "red"
+meanaggg$color[meanaggg$Group.2=="levelB"] = "blue"
+meanaggg$color[meanaggg$Group.2=="levelC"] = "darkgreen" 
+
+dotchart(meanaggg$x,labels=meanaggg$Group.2, groups=meanaggg$Group.1,color=meanaggg$color) ## dotchart
+```
+
+\newpage 
+
+## Interaction Plot
+
+```{r fig.cap="Interaction Plots of One Numeric Variable and Two Factor Variables"}
+interaction.plot(meanaggg$Group.2,meanaggg$Group.1,meanaggg$x,type="b", col=c(1:2),pch=c(18,24)) ## interaction plot - line plots of means
+```
+
+\newpage 
+
+## some a bar plot
+```{r}
+par(mfrow=c(1,2))
+
+level1=meanaggg[meanaggg$Group.1=="level1",]
+level2=meanaggg[meanaggg$Group.1=="level2",]
+
+barplot(level1$x,names.arg=level1$Group.2, main="FacVar1=level1")
+barplot(level2$x,names.arg=level2$Group.2, main="FacVar1=level2")
+```
+
+\newpage 
+
+# Three Variables: Two Numeric and One Factor Variable
+
+## Scatter Plot
+
+```{r fig.cap="Scatter plot with color identifying the factor variable"}
+par(mfrow=c(1,1))
+plot(simData$NumVar1,simData$NumVar2, col=simData$FacVar1)
+legend("topright",levels(simData$FacVar1),fill=simData$FacVar1)
+```
+
+\newpage 
+
+# Three Variables: Three Numeric Variables
+
+## Plot and Bubble Plot
+
+```{r}
+## NumVar4 is 2001 through 2050... possibly, a time variable - use that as the x-axis
+plot(simData$NumVar4,simData$NumVar1,type="o",ylim=c(0,max(simData$NumVar1,simData$NumVar2)))## join dots with lines
+
+lines(simData$NumVar4,simData$NumVar2,type="o",lty=2,col="red")## add another line
+
+## Bubble plot - scatter plot of NumVar1 and NumVar2 with individual observations sized by NumVar3
+# http://flowingdata.com/2010/11/23/how-to-make-bubble-charts/
+radius <- sqrt( simData$NumVar3/ pi )
+symbols(simData$NumVar1,simData$NumVar2,circles=radius, inches=.25,fg="white", bg="red", main="Sized by NumVar3")
+```
+
+\newpage 
+
+# Scatterplot Matrix of all Numeric Variables
+```{r fig.cap="Scatterplot Matrix of all Numeric Variables"}
+pairs(simData[,4:7], col=simData$FacVar1)
+##colored by a factor Variable
+```
+

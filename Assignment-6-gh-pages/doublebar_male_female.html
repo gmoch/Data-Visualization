@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>BarChartID51e3fd32e6c</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+ <!-- BarChart generated in R 3.1.1 by googleVis 0.5.6 package -->
+<!-- Tue Nov 11 14:09:27 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataBarChartID51e3fd32e6c () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "California",
+72.25325885,
+76.73521851 
+],
+[
+ "Texas",
+57.14285714,
+63.01726947 
+],
+[
+ "New York",
+57.29442971,
+71.7083052 
+],
+[
+ "Virginia",
+67.20779221,
+64.36525612 
+],
+[
+ "Maryland",
+58.82352941,
+67.22817764 
+],
+[
+ "New Jersey",
+69.83471074,
+74.7761194 
+],
+[
+ "Illinois",
+64.03940887,
+70.28023599 
+],
+[
+ "Florida",
+34.96732026,
+45.76131687 
+],
+[
+ "Georgia",
+37.11790393,
+54.16666667 
+],
+[
+ "Mass",
+61.70212766,
+67.80432309 
+],
+[
+ "Pennsylvania",
+74.52830189,
+72.84427284 
+],
+[
+ "Washington",
+72.77777778,
+75.89453861 
+],
+[
+ "Ohio",
+79.41176471,
+79.32773109 
+],
+[
+ "Michigan",
+77.27272727,
+78.93660532 
+],
+[
+ "North Carolina",
+58.73015873,
+63.52459016 
+],
+[
+ "Connecticut",
+62.92134831,
+69.00269542 
+],
+[
+ "Indiana",
+71.875,
+59.63302752 
+],
+[
+ "Minnesota",
+72.72727273,
+70.80745342 
+],
+[
+ "Colorado",
+54.34782609,
+68.20987654 
+],
+[
+ "Kentucky",
+76.92307692,
+57.19557196 
+],
+[
+ "Wisconsin",
+71.42857143,
+74.02135231 
+],
+[
+ "South Carolina",
+45.61403509,
+67.43119266 
+],
+[
+ "Tenn",
+61.64383562,
+67.41573034 
+],
+[
+ "Arizona",
+36.66666667,
+63.75 
+],
+[
+ "Oregon",
+72.72727273,
+52.56410256 
+],
+[
+ "Oklahoma",
+56.66666667,
+60.41666667 
+],
+[
+ "Arkansas",
+35.41666667,
+54.4 
+],
+[
+ "Missouri",
+56,
+77.7027027 
+],
+[
+ "Maine",
+84,
+63.97058824 
+],
+[
+ "Alabama",
+77.27272727,
+78.84615385 
+],
+[
+ "Iowa",
+72.72727273,
+80.37383178 
+],
+[
+ "New Hampshire",
+50,
+79.7752809 
+],
+[
+ "Hawaii",
+37.5,
+50.74626866 
+],
+[
+ "West Virginia",
+60,
+60.60606061 
+],
+[
+ "Delaware",
+44.44444444,
+67.27272727 
+],
+[
+ "Rhode Island",
+88.88888889,
+76.92307692 
+],
+[
+ "New Mexico",
+62.5,
+77.55102041 
+],
+[
+ "Idaho",
+66.66666667,
+68.42105263 
+],
+[
+ "Nebraska",
+100,
+73.17073171 
+] 
+];
+data.addColumn('string','X2013.data');
+data.addColumn('number','X..female.passed.1');
+data.addColumn('number','X..Males.Passed.1');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartBarChartID51e3fd32e6c() {
+var data = gvisDataBarChartID51e3fd32e6c();
+var options = {};
+options["allowHtml"] = true;
+options["titleTextStyle"] = {color:'black', 
+                                           fontName:'Orbitron', 
+                                           fontSize:16};
+options["vAxis"] = {gridlines:{color:'red', count:3}};
+options["hAxis"] = {title:'Percentage'};
+options["series"] = [{color:'red', targetAxisIndex: 0}, 
+                                   {color: 'black',targetAxisIndex:1}];
+options["vAxes"] = [{title:'State'}];
+options["legend"] = "right";
+options["width"] =   1200;
+options["height"] =    900;
+
+
+    var chart = new google.visualization.BarChart(
+    document.getElementById('BarChartID51e3fd32e6c')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartBarChartID51e3fd32e6c);
+})();
+function displayChartBarChartID51e3fd32e6c() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartBarChartID51e3fd32e6c"></script>
+ 
+<!-- divChart -->
+  
+<div id="BarChartID51e3fd32e6c" 
+  style="width: 1200; height: 900;">
+</div>
+ <div><span>Data: data &#8226; Chart ID: <a href="Chart_BarChartID51e3fd32e6c.html">BarChartID51e3fd32e6c</a> &#8226; <a href="https://github.com/mages/googleVis">googleVis-0.5.6</a></span><br /> 
+<!-- htmlFooter -->
+<span> 
+  R version 3.1.1 (2014-07-10) 
+  &#8226; <a href="https://developers.google.com/terms/">Google Terms of Use</a> &#8226; <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/barchart">Documentation and Data Policy</a>
+</span></div>
+</body>
+</html>

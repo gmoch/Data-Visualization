@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ColumnChartID14a124055c21</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<center><body>
+
+<h1> Data Visualization HW: Pew Global Dataset </h1>
+<h2> Granger Moch and Will Murphy </h2>
+<h3> November 17th, 2014 </h3>
+<br>
+<hr>
+ <!-- ColumnChart generated in R 3.1.1 by googleVis 0.5.6 package -->
+<!-- Mon Nov 17 20:42:06 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataColumnChartID14a124055c21 () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "70-75",
+940,
+416 
+],
+[
+ "76-81",
+374,
+229 
+],
+[
+ "82-87",
+176,
+149 
+],
+[
+ "88-93",
+29,
+36 
+] 
+];
+data.addColumn('string','elderlyage');
+data.addColumn('number','Yes');
+data.addColumn('number','No');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartColumnChartID14a124055c21() {
+var data = gvisDataColumnChartID14a124055c21();
+var options = {};
+options["allowHtml"] = true;
+options["width"] =    750;
+options["height"] =    400;
+options["isStacked"] = true;
+options["title"] = "Cell Phone Ownership on Behalf of the Elderly";
+options["hAxes"] = [{title:'Age', textPosition: 'out'}];
+options["vAxes"] = [{title:'Responses', textPosition: 'out'}];
+
+
+    var chart = new google.visualization.ColumnChart(
+    document.getElementById('ColumnChartID14a124055c21')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "corechart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartColumnChartID14a124055c21);
+})();
+function displayChartColumnChartID14a124055c21() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartColumnChartID14a124055c21"></script>
+ 
+<!-- divChart -->
+  
+<div id="ColumnChartID14a124055c21" 
+  style="width: 750; height: 400;">
+</div>
+<p>This graph explores the common idea that as the elderly population gets older, they are less willing or perhaps not able to use a cell phone. </p>
+<hr>
+<h3> Current (perceived) personal economic situation vs.  (perceived) country's economic status </h3>
+<iframe src="http://gballa50.github.io/googleVizrepo/uv.html" height="600" width="600"> </iframe>
+<p> This graph showed how respondents perceived their current personal economic situation compared how they perceived their country's economic status. The respondents' perceptions of the two situations were somewhat similar. </p>
+<hr>
+<br>
+<img src="gc.png" alt="gc" height="700" width="800">
+<p> This graph looked at respondents answers to whether future children in their country will be better off financially than their parents were, broken into each of the countries surveyed. Some key findings include that China, Brazil, Nigeria, Venezuela, and the Phillipines all had the majority of people respond that their children would be better off financially. On the other side, France, Britain, Spain, the United States, and Italy had majority of people respond that their children would be worse off financially.    </p>
+<hr>
+<br>
+<img src="gensat.png" alt="gensat" height="600" width="680">
+<p> This graph looks at the overall satisfaction with their country by gender. Most people are dissatisfied with their country, and more women were dissatisfied than men. </p>
+<hr>
+<br>
+<img src="q47.png" alt="q47" height="600" width="680">
+<p>This graph takes a look at the distribution of attitudes of US respondents and how they think US policy takes into account other countries. More people seem to think it takes into account other countries than not. The most common answer was that US policy takes into account other countries a "Fair Amount." </p>
+<hr>
+<br>
+<img src="uspart.png" alt="uspart" height="600" width="800">
+
+<p>This graph looked at how people in the US expected the US economy to change in the next 12 months and the answers were split into political parties to see the breakdown of the respondents in each of the answers. People who expected the economy to improve were generally Democrats, people who expected the economy to stay relatively the same were mostly Independents, and people who thought the economy would be worse were generally Republicans. </p>
+<hr>
+<br>
+<img src="partyln.png" alt="partyln" height="600" width="600">
+<p> The Party LN column was for US respondents who identified as Independent and asked them which party they affiliated more with between Democrats and Republicans. 
+
+This graph looked at which political party Independents would lean towards if they had to choose Republicans or Democrats. </p>
+<hr>
+<h3> Pie chart showing number of respondents from each party </h3>
+
+<iframe src="http://gballa50.github.io/googleVizrepo/pie.html"  height="400" width="800"> </iframe>
+
+<hr>
+<h3> UV chart showing forecast of PERSONAL economic situation over the next 12 months, male and female </h3>
+<iframe src="http://gballa50.github.io/googleVizrepo/uvgenderfixed.html" height="600" width="700"> </iframe>
+<p> The perceptions between the two sexes appear to be quite similar. </p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://arrow.scrolltotop.com/arrow13.js"></script>
+<noscript>Not seeing a <a href="http://www.scrolltotop.com/">Scroll to Top Button</a>? Go to our FAQ page for more info.</noscript>
+
+</body></center>
+</html>

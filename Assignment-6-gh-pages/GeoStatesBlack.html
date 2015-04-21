@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>GeoChartID51ece13e3c</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<style type="text/css">
+body {
+  color: #444444;
+  font-family: Arial,Helvetica,sans-serif;
+  font-size: 75%;
+  }
+  a {
+  color: #4D87C7;
+  text-decoration: none;
+}
+</style>
+</head>
+<body>
+ <!-- GeoChart generated in R 3.1.1 by googleVis 0.5.6 package -->
+<!-- Mon Nov 10 16:47:41 2014 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataGeoChartID51ece13e3c () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+ "California",
+56.75675676 
+],
+[
+ "Texas",
+48.48484848 
+],
+[
+ "New York",
+33.82352941 
+],
+[
+ "Virginia",
+28.20512821 
+],
+[
+ "Maryland",
+27.05882353 
+],
+[
+ "New Jersey",
+47.05882353 
+],
+[
+ "Illinois",
+40 
+],
+[
+ "Florida",
+19.27710843 
+],
+[
+ "Georgia",
+21.70542636 
+],
+[
+ "Mass",
+38.23529412 
+],
+[
+ "Pennsylvania",
+66.66666667 
+],
+[
+ "Washington",
+33.33333333 
+],
+[
+ "Ohio",
+62.5 
+],
+[
+ "Michigan",
+66.66666667 
+],
+[
+ "North Carolina",
+21.42857143 
+],
+[
+ "Connecticut",
+54.54545455 
+],
+[
+ "Indiana",
+30 
+],
+[
+ "Minnesota",
+40 
+],
+[
+ "Colorado",
+45.45454545 
+],
+[
+ "Kentucky",
+50 
+],
+[
+ "Wisconsin",
+20 
+],
+[
+ "South Carolina",
+36.84210526 
+],
+[
+ "Tenn",
+32 
+],
+[
+ "Arizona",
+27.27272727 
+],
+[
+ "Oklahoma",
+44.44444444 
+],
+[
+ "Arkansas",
+42.85714286 
+],
+[
+ "Missouri",
+50 
+],
+[
+ "Alabama",
+75 
+] 
+];
+data.addColumn('string','X2013.data');
+data.addColumn('number','X..Black.passed');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartGeoChartID51ece13e3c() {
+var data = gvisDataGeoChartID51ece13e3c();
+var options = {};
+options["width"] =    600;
+options["height"] =    400;
+options["region"] = "US";
+options["displayMode"] = "regions";
+options["resolution"] = "provinces";
+
+
+    var chart = new google.visualization.GeoChart(
+    document.getElementById('GeoChartID51ece13e3c')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "geochart";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartGeoChartID51ece13e3c);
+})();
+function displayChartGeoChartID51ece13e3c() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartGeoChartID51ece13e3c"></script>
+ 
+<!-- divChart -->
+  
+<div id="GeoChartID51ece13e3c" 
+  style="width: 600; height: 400;">
+</div>
+ <div><span>Data: blackdf &#8226; Chart ID: <a href="Chart_GeoChartID51ece13e3c.html">GeoChartID51ece13e3c</a> &#8226; <a href="https://github.com/mages/googleVis">googleVis-0.5.6</a></span><br /> 
+<!-- htmlFooter -->
+<span> 
+  R version 3.1.1 (2014-07-10) 
+  &#8226; <a href="https://developers.google.com/terms/">Google Terms of Use</a> &#8226; <a href="https://google-developers.appspot.com/chart/interactive/docs/gallery/geochart">Documentation and Data Policy</a>
+</span></div>
+</body>
+</html>

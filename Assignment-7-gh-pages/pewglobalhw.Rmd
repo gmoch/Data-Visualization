@@ -1,0 +1,87 @@
+---
+title: "pewglobal"
+author: "Granger Moch"
+date: "November 14, 2014"
+output: html_document
+---
+
+library(dplyr)
+library(rCharts)
+library(ggplot2)
+library(googleVis)
+
+load("mydata.rda")
+
+elderly= mydata %>%
+select(Q165, Q67) %>%
+mutate(Q165= as.numeric(Q165)) %>%
+filter(Q165>=70, Q165 <=96) %>%
+arrange(desc(Q165))
+
+elderly1= elderly %>%
+select(Q165, Q67) %>%
+filter(Q165 >= 70, Q165 <= 75)
+
+elderly2= elderly %>%
+select(Q165, Q67) %>%
+filter(Q165 >= 76, Q165 <= 81)
+
+elderly3= elderly %>%
+select(Q165, Q67) %>%
+filter(Q165 >= 82, Q165 <= 87)
+
+elderly4= elderly %>%
+select(Q165, Q67) %>%
+filter(Q165 >= 88, Q165 <= 93)
+
+sum(elderly1$Q67=="Yes")
+sum(elderly1$Q67=="No")
+
+elderlyage= c("70-75", "76-81", "82-87", "88-93")
+Yes= c(sum(elderly1$Q67=="Yes"),sum(elderly2$Q67=="Yes"), sum(elderly3$Q67=="Yes"), sum(elderly4$Q67=="Yes"))
+No= c(sum(elderly1$Q67=="No"),sum(elderly2$Q67=="No"), sum(elderly3$Q67=="No"), sum(elderly4$Q67=="No"))
+
+elderlyfinaldf=data.frame(elderlyage, Yes, No)
+
+elderlystacked <- gvisColumnChart(elderlyfinaldf,options=list(width=750, height=400, isStacked=TRUE))
+plot(elderlystacked)
+
+---------
+usparty <- mydata %>%
+  select(COUNTRY, Q1, Q4, Q5, Q6, Q7, Q8, Q47US, Q164, PARTY) %>%
+  filter(COUNTRY=="United States") %>%
+  group_by(PARTY, Q1, Q5)
+
+p4 <- nPlot(~ PARTY, data = usparty, type = 'pieChart')
+p4
+----
+
+#Current (perceived) personal economic situation vs current (perceived) country's economic status
+
+econtype= c("Personal", "Country")
+
+Response= c("Very good", "Very good", "Somewhat good", "Somewhat good", "Somewhat bad", "Somewhat bad", "Very bad", "Very bad", "Don't Know", "Don't Know", "Refused", "Refused")
+
+Values= c(sum(mydata$Q6=="Very good"), sum(mydata$Q4=="Very good"), sum(mydata$Q6=="Somewhat good"), sum(mydata$Q4=="Somewhat good"), sum(mydata$Q6=="Somewhat bad"), sum(mydata$Q4=="Somewhat bad"), sum(mydata$Q6=="Very bad"), sum(mydata$Q4=="Very bad"), sum(mydata$Q6=="Don't know"), sum(mydata$Q4=="Don't know"), sum(mydata$Q6=="Refused"), sum(mydata$Q4=="Refused"))
+
+economydf= data.frame(econtype, Response, Values)
+
+u1=uPlot(x = 'econtype', y = ('Values'), group='Response', data = economydf, type = 'Bar')
+u1
+u1$save("uv.html",cdn=TRUE)
+--------
+#UV chart showing gender, forecast of PERSONAL economic situation over the next 12 months (Q7)
+
+gender= c("Male", "Female")
+
+Responsegender= c("Improve a lot", "Improve a lot", "Improve a little", "Improve a little", "Remain the same", "Remain the same", "Worsen a little", "Worsen a little", "Worsen a lot", "Worsen a lot", "Refused", "Refused")
+
+Valuesgender= c(sum(mydata$Q164=="Male" & mydata$Q7=="Improve a lot"), sum(mydata$Q164=="Female" & mydata$Q7=="Improve a lot"), sum(mydata$Q164=="Male" & mydata$Q7=="Improve a little"), sum(mydata$Q164=="Female" & mydata$Q7=="Improve a little"), sum(mydata$Q164=="Male" & mydata$Q7=="Remain the same"), sum(mydata$Q164=="Female" & mydata$Q7=="Remain the same"), sum(mydata$Q164=="Male" & mydata$Q7=="Worsen a little"), sum(mydata$Q164=="Female" & mydata$Q7=="Worsen a little"), sum(mydata$Q164=="Male" & mydata$Q7=="Worsen a lot"), sum(mydata$Q164=="Female" & mydata$Q7=="Worsen a lot"),sum(mydata$Q164=="Male" & mydata$Q7=="Refused"), sum(mydata$Q164=="Female" & mydata$Q7=="Refused"))
+
+q7df=data.frame(gender, Responsegender, Valuesgender)
+
+uvgender=uPlot(x = 'gender', y = ('Valuesgender'), group='Responsegender', data = q7df, type = 'Bar')
+uvgender
+uvgender$save("uvgenderfixed.html",cdn=TRUE)
+
+------
